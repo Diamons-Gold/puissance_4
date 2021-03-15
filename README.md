@@ -106,7 +106,7 @@ Fonction match_nul(gril):
 Renvoie True si la partie est nulle, c'est à dire si la ligne du haut est remplie,False sinon.
 '''
 
-def coup_aleatoire(gril,j):
+def coup_aleatoire(gril, j):
 '''
 Fonction coup_aleatoire(gril,j):
 Joue un coup aléatoire pour le joueur j.
