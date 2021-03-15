@@ -7,7 +7,6 @@ def grille_vide():
         La fonction renvoie le tableau.
     '''
 
-    return [[0 for i in range(7)] for i in range(6)]
 
 def affiche(gril):
     '''
@@ -21,21 +20,6 @@ def affiche(gril):
         la valeur 2 représente un pion du joueur 2, représenté par un 0.
     '''
 
-    aff = [[]]*6
-
-    for i in range(6):
-        aff[i] = '|'.join([str(j) for j in gril[i]]).replace('0','.').replace('1','X').replace('2','0')
-
-    print(
-        '  0 1 2 3 4 5 6 \n'
-        '  -------------\n'
-        '5', aff[5],'\n'
-        '4', aff[4],'\n'
-        '3', aff[3],'\n'
-        '2', aff[2],'\n'
-        '1', aff[1],'\n'
-        '0', aff[0],'\n'
-        '  -------------')
 
 def coup_possible(gril, col):
     '''
@@ -45,10 +29,7 @@ def coup_possible(gril, col):
     Renvoie True s’il est possible de jouer dans la colonne col, False sinon.
     Il est possible de jouer dans la colonne col, si il existe une case avec la valeur 0 dans cette colonne.
     '''
-    
-    if 0 in [gril[i][col] for i in range(6)]:
-        return True
-    return False
+
 
 def jouer(gril, j, col):
     '''
@@ -62,13 +43,7 @@ def jouer(gril, j, col):
     Si j vaut 2 la première case vide de la colonne col prendra la valeur 2
     '''
 
-    if coup_possible(gril, col):
-        for i in range(6):
-            print(i)
-            if gril[i][col] == 0:
-                gril[i][col] = j
-                affiche(gril)
-                return
+
 
 def horiz(gril, j, lig):
     '''
@@ -133,7 +108,7 @@ def diag_haut(gril, j, lig, col):
     Renvoie True si c'est le cas, False sinon.
     '''
 
-    
+
 
 
 # gril = grille_vide()
