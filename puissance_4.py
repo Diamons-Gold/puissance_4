@@ -44,7 +44,6 @@ def jouer(gril, j, col):
     '''
 
 
-
 def horiz(gril, j, lig):
     '''
     Fonction horiz(gril, j, lig, col):
@@ -107,14 +106,3 @@ def diag_haut(gril, j, lig, col):
         col la colonne, un entier avec la valeur entre 0 et 6
     Renvoie True si c'est le cas, False sinon.
     '''
-
-
-
-
-# gril = grille_vide()
-from random import choice
-gril = [[choice([0,1,2]) for i in range(7)] for i in range(6)]
-
-
-affiche(gril)
-vert(gril, 1, 5)
