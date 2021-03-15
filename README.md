@@ -62,7 +62,7 @@ def vert(gril, j, lig, col):
 Fonction vert(gril, j, lig, col):
 Détermine si il y a un alignement vertical de 4 pions du joueur j à partir de la colonne (col).
 arguments:
-    grill la grille avec les pions.
+    gril la grille avec les pions.
     j le joueur, un entier avec la valeur 1 ou 2.
     lig la ligne, un entier avec la valeur entre 0 et 5.
     col la colonne, un entier avec la valeur entre 0 et 6.
@@ -74,7 +74,7 @@ def diag_haut(gril, j, lig, col):
 Fonction diag_haut(gril, j, lig, col):
 Détermine si il y a un alignement diagonal vers le haut de 4 pions du joueur j à partir de la case (lig,col).
 Arguments:
-gril la grille avec les pions.
+    gril la grille avec les pions.
     j le joueur, un entier avec la valeur 1 ou 2.
     lig la ligne, un entier avec la valeur entre 0 et 5.
     col la colonne, un entier avec la valeur entre 0 et 6.
