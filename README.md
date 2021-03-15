@@ -2,6 +2,7 @@
 
 **Spécification des fonctions :**
 
+```python
 def grille_vide():
 '''
 Fonction grille_vide():
@@ -111,3 +112,4 @@ Fonction coup_aleatoire(gril,j):
 Joue un coup aléatoire pour le joueur j.
 On suppose la grille non pleine, condition indispensable pour ne pas se trouver dans une boucle infinie !
 '''
+```
