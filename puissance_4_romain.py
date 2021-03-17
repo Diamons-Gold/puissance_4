@@ -64,13 +64,12 @@ def jouer(gril, j, col):
 
     if coup_possible(gril, col):
         for i in range(6):
-            print(i)
             if gril[i][col] == 0:
                 gril[i][col] = j
                 affiche(gril)
                 return
 
-def horiz(gril, j, lig):
+def horiz(gril, j, lig): # del col
     '''
     Fonction horiz(gril, j, lig, col):
     Détermine si il y a un alignement horizontal de 4 pions du joueur j
@@ -93,7 +92,7 @@ def horiz(gril, j, lig):
                 return True
     return False
 
-def vert(gril, j, col):
+def vert(gril, j, col): # del lig
     '''
     Fonction vert(gril, j, lig, col):
     Détermine si il y a un alignement vertical de 4 pions du joueur j
@@ -123,23 +122,129 @@ def vert(gril, j, col):
 def diag_haut(gril, j, lig, col):
     '''
     Fonction diag_haut(gril, j, lig, col):
-    Détermine si il y a un alignement diagonal vers le haut de 4 pions du joueur j à
-    partir de la case (lig,col).
+    Détermine si il y a un alignement diagonal vers le haut de 4 pions du joueur j à partir de la case (lig,col).
     Arguments:
         gril la grille avec les pions.
-        j le joueur, un entier avec la valeur 1 ou 2
-        lig la ligne, un entier avec la valeur entre 0 et 2
-        col la colonne, un entier avec la valeur entre 0 et 6
+        j le joueur, un entier avec la valeur 1 ou 2.
+        lig la ligne, un entier avec la valeur entre 0 et 5.
+        col la colonne, un entier avec la valeur entre 0 et 6.
     Renvoie True si c'est le cas, False sinon.
     '''
+    
+    diag = []
+    d = col
+    h = 5 - lig
 
+    if d > h :
+        d -= d - h 
+    elif h > d :
+        h -= h - d 
+
+    while not(lig + h == -1) and not(col - d == 7):
+        diag.append(gril[lig + h][col - d])
+        d -= 1
+        h -= 1
+
+    if j in diag:
+        comp = 0
+        for i in diag:
+            if j == i:
+                comp += 1
+            else:
+                comp = 0
+            if comp >= 4:
+                return True
+    return False
+    
+def diag_bas(gril, j, lig, col):
+    '''
+    Fonction diag_bas(gril, j, lig, col):
+    Détermine si il y a un alignement diagonal vers le haut de 4 pions du joueur j à partir de la case (lig,col).
+    Arguments:
+        gril la grille avec les pions.
+        j le joueur, un entier avec la valeur 1 ou 2.
+        lig la ligne, un entier avec la valeur entre 0 et 5.
+        col la colonne, un entier avec la valeur entre 0 et 6.
+    Renvoie True si c'est le cas, False sinon.
+    '''
+    
+    diag = []
+    d = col
+    h = 5 - lig
+
+    if d > h :
+        d -= d - h 
+    elif h > d :
+        h -= h - d 
+
+    while not(lig + h == -1) and not(col - d == -1):
+        diag.append(gril[lig + h][col + d])
+        d -= 1
+        h -= 1
+
+    if j in diag:
+        comp = 0
+        for i in diag:
+            if j == i:
+                comp += 1
+            else:
+                comp = 0
+            if comp >= 4:
+                return True
+    return False
+
+def victoire(gril, j, lig, col): # add lig, add col
+    '''
+    fonction victoire(gril, j):
+    Renvoie un booléen True si le joueur j a gagné, False sinon.
+    Fait appel aux fonctions horiz(), vert(), diag_haut() et diag_bas()
+    '''
+
+    if horiz(gril, j, lig) == True:
+        return True
+    elif vert(gril, j, col) == True:
+        return True
+    elif diag_haut(gril, j, lig, col) == True:
+        return True
+    elif diag_bas(gril, j, lig, col) == True:
+        return True
+    return False
     
 
+def match_nul(gril):
+    '''
+    Fonction match_nul(gril):
+    Renvoie True si la partie est nulle, c'est à dire si la ligne du haut est remplie,False sinon.
+    '''
 
-# gril = grille_vide()
-from random import choice
-gril = [[choice([0,1,2]) for i in range(7)] for i in range(6)]
+    if not(0 in [gril[i] for i in range(6)]):
+        return True
+    return False
+
+from random import randint
+
+def coup_aleatoire(gril, j):
+    '''
+    Fonction coup_aleatoire(gril,j):
+    Joue un coup aléatoire pour le joueur j.
+    On suppose la grille non pleine, condition indispensable pour ne pas se trouver dans une boucle infinie !
+    '''
+
+    test = False
+    while not(test):
+        col = randint(0,6)
+        test = coup_possible(gril, col)
+
+    jouer(gril, j, col)
 
 
-affiche(gril)
-vert(gril, 1, 5)
+def run():
+    gril = grille_vide()
+    for i in range(1,42):
+        j = 2 - i%2
+        col = int(input(f'Dans qu\'elle colonne voulez vous jouer joueur {j} : '))
+        while col < 0 or col > 6 :
+            col = int(input(f'Votre reponse est incorecte ! \n Dans qu\'elle colonne voulez vous jouer joueur {j} : '))
+        jouer(gril, j, col)
+
+run()
